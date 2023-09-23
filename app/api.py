@@ -1,14 +1,13 @@
-import logging
 import logging.config
 import uuid
 
+import uvicorn
 from fastapi import FastAPI
 
-from app.models import TaskStatus, CalcTask
-from app.tasks import async_calculate
+from models import TaskStatus, CalcTask
+from tasks import async_calculate
 
-from app.logging_config import LOGGING_CONFIG
-
+from logging_config import LOGGING_CONFIG
 
 logging.config.dictConfig(LOGGING_CONFIG)
 logger = logging.getLogger(__name__)
@@ -56,3 +55,7 @@ def get_tasks():
     logger.info("Выборка всех задач")
     return [TaskStatus(id=task_id, status=task["status"], result=str(task["result"])) for task_id, task in
             tasks.items()]
+
+
+if __name__ == '__main__':
+    uvicorn.run("api:app", host='127.0.0.1', port=8000, reload=True, workers=3)
