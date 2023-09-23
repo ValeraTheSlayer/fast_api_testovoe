@@ -1,5 +1,6 @@
-from fastapi import FastAPI
 import uuid
+
+from fastapi import FastAPI
 
 from app.models import TaskStatus, CalcTask
 from app.tasks import async_calculate
