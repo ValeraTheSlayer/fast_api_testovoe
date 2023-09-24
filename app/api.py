@@ -4,10 +4,10 @@ import uuid
 import uvicorn
 from fastapi import FastAPI
 
-from models import TaskStatus, CalcTask
-from tasks import async_calculate
+from app.models import TaskStatus, CalcTask
+from app.tasks import async_calculate
 
-from logging_config import LOGGING_CONFIG
+from app.logging_config import LOGGING_CONFIG
 
 logging.config.dictConfig(LOGGING_CONFIG)
 logger = logging.getLogger(__name__)
